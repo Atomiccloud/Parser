@@ -47,6 +47,7 @@ public class Parser {
 
 	private static void declarationP(String curr_token, String next_token) {
 		
+<<<<<<< HEAD
 		if(next_token == ";" || next_token == "[" ) {
 			varDecP(curr_token, next_token);
 		}
@@ -70,5 +71,31 @@ public class Parser {
 		// TODO Auto-generated method stub
 		
 	}
+=======
+		if(next_token.equals(";") || next_token.equals("[")) {
+			varDecP(curr_token, next_token);
+		}
+		
+		// OR if (
+		funDecP(curr_token, next_token);
+		// else Reject
+	}
+
+	private static void funDecP(String curr_token, String next_token) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void varDecP(String curr_token, String next_token) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void typeSpecifier(String curr_token, String next_token) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	//Just a test for github and laptop
 	
 }
