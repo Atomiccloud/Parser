@@ -44,14 +44,18 @@ public class Parser {
 
 	private static void declaration() {
 		typeSpecifier();
+		checkID();
+		declarationP();
+		
+	}
+
+	private static void checkID() {
 		if(curr_token.contains("ID: ")) {
 			System.out.println("A: " + curr_token);
 			curr_token = sc.nextLine();
 		} else {
 			rej();
-		}
-		declarationP();
-		
+		}		
 	}
 
 	private static void declarationP() {
@@ -59,6 +63,7 @@ public class Parser {
 			curr_token = sc.nextLine();			
 			varDecP();
 		} else if (curr_token.equals("(")) {
+			System.out.println("A: (" );
 			curr_token = sc.nextLine();
 			funDecP();
 		} else {
@@ -69,11 +74,79 @@ public class Parser {
 	private static void funDecP() {
 		params();
 		if(curr_token.equals(")")) {
+			System.out.println("A: )");
 			curr_token = sc.nextLine();
+			compoundStmt();
+		} else {
+			rej();
+		}
+	}
+
+	private static void compoundStmt() {
+		if(curr_token.equals("{")) {
+			curr_token = sc.nextLine();
+			localDec();
+			stmtList();
+		}
+	}
+
+	private static void stmtList() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void localDec() {
+				if (!curr_token.equals("}")) {
+					varDec();
+					localDecP();
+				} else if (curr_token.equals("}")) {
+					System.out.println("A: }");
+				} else {
+					rej();
+				}
+	}
+
+	private static void localDecP() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void varDec() {
+		typeSpecifier();
+		checkID();
+		if(curr_token.equals(";")) {
+			curr_token = sc.nextLine();
+			System.out.println("A: ;");
+		} else if (curr_token.equals("[")) {
+			curr_token = sc.nextLine();
+			System.out.println("A: [");
+			checkNUM();
+		} else {
+			rej();
+		}
+		
+	}
+
+	private static void checkNUM() {
+		try{
+			Integer.parseInt(curr_token);
+			System.out.println("A: " + curr_token);
+			curr_token = sc.nextLine();
+		} catch(Exception e) {
+			rej();
 		}
 	}
 
 	private static void params() {
+		if(curr_token.equals("K: void")) {
+			System.out.println("A: void");
+			curr_token = sc.nextLine();
+		} else {
+			paramsList();
+		}
+	}
+
+	private static void paramsList() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -90,7 +163,6 @@ public class Parser {
 		} else if(curr_token.equals("K: void")){		
 			System.out.println("A: void");
 			curr_token = sc.nextLine();
-			System.out.println(curr_token);
 		} else if(curr_token.equals("K: float")){		
 			System.out.println("A: float");
 			curr_token = sc.nextLine();
