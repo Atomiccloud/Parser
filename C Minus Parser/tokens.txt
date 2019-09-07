@@ -1,0 +1,56 @@
+*
+/
+ID: iiii
+=
+INT: 3
+@
+INT: 33
+;
+ID: int
+ID: g
+INT: 4
+ID: cd
+(
+ID: int
+ID: u
+,
+ID: int
+ID: v
+)
+{
+ID: if
+(
+ID: v
+==
+>=
+INT: 0
+)
+ID: return
+ID: u
+;
+ID: else
+ID: ret
+_
+ID: urn
+ID: gcd
+(
+ID: vxxxxxxvvvvv
+,
+ID: u
+-
+ID: u
+/
+ID: v
+*
+ID: v
+)
+;
+!
+}
+ID: return
+ID: void
+ID: while
+ID: void
+ID: main
+(
+)
