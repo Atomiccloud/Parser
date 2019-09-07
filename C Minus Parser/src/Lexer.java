@@ -213,7 +213,7 @@ public class Lexer {
 							for(int j=0; j<keywords.length;j++) {
 								if(substring.equals(keywords[j])) {
 //									System.out.println("Keyword: " + substring);
-									writer.println("ID: " + substring);
+									writer.println("K: " + substring);
 									isKeyword = true;
 									break;
 								} else {

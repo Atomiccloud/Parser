@@ -4,20 +4,24 @@ import java.util.Scanner;
 
 public class Parser {
 
+	//Global Variables
+	static Scanner sc = null;
+	static String curr_token = null;
+ 
+		
 	public static void main(String[] args) {
 		// declarations
-		Scanner sc = null;
+		
 		File textFile = new File(args[0]);
 		Lexer lexer = new Lexer(textFile);
 		textFile = new File("tokens.txt");
-		String curr_token = null;
-		String next_token = null;
+//		String next_token = null;
 		
 		try {
 			sc = new Scanner(textFile);
-			curr_token = sc.next();
-			next_token = curr_token;
-			decList(curr_token, next_token);			
+			curr_token = sc.nextLine();
+//			next_token = curr_token;
+			decList();			
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found!");
 		}
@@ -26,76 +30,77 @@ public class Parser {
 
 	}
 	
-	private static void decList(String curr_token, String next_token) {
-		declaration(curr_token, next_token);
-		decListP(curr_token, next_token);
+	private static void decList() {
+		declaration();
+		decListP();
 	}
 	
-	private static void decListP(String curr_token, String next_token) {
+	private static void decListP() {
 		//if need more dec do this
-		declaration(curr_token, next_token);
-		decListP(curr_token, next_token);
+		declaration();
+		//decListP();
 		// else do nothing
 	}
 
-	private static void declaration(String curr_token, String next_token) {
-		typeSpecifier(curr_token, next_token);
-		//accept ID
-		declarationP(curr_token, next_token);
-		
-	}
-
-	private static void declarationP(String curr_token, String next_token) {
-		
-<<<<<<< HEAD
-		if(next_token == ";" || next_token == "[" ) {
-			varDecP(curr_token, next_token);
+	private static void declaration() {
+		typeSpecifier();
+		if(curr_token.contains("ID: ")) {
+			System.out.println("A: " + curr_token);
+			curr_token = sc.nextLine();
+		} else {
+			rej();
 		}
-		
-		// OR if (
-		funDecP(curr_token, next_token);
-		// else Reject
-	}
-
-	private static void funDecP(String curr_token, String next_token) {
-		// TODO Auto-generated method stub
+		declarationP();
 		
 	}
 
-	private static void varDecP(String curr_token, String next_token) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private static void typeSpecifier(String curr_token, String next_token) {
-		// TODO Auto-generated method stub
-		
-	}
-=======
-		if(next_token.equals(";") || next_token.equals("[")) {
-			varDecP(curr_token, next_token);
+	private static void declarationP() {
+		if (curr_token.equals(";") || curr_token.equals("[")) {
+			curr_token = sc.nextLine();			
+			varDecP();
+		} else if (curr_token.equals("(")) {
+			curr_token = sc.nextLine();
+			funDecP();
+		} else {
+			rej();
 		}
-		
-		// OR if (
-		funDecP(curr_token, next_token);
-		// else Reject
 	}
 
-	private static void funDecP(String curr_token, String next_token) {
+	private static void funDecP() {
+		params();
+		if(curr_token.equals(")")) {
+			curr_token = sc.nextLine();
+		}
+	}
+
+	private static void params() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private static void varDecP(String curr_token, String next_token) {
+	private static void varDecP() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private static void typeSpecifier(String curr_token, String next_token) {
-		// TODO Auto-generated method stub
-		
-	}
+	private static void typeSpecifier() {
+		if(curr_token.equals("K: int")){		
+			System.out.println("A: int");
+			curr_token = sc.nextLine();
+		} else if(curr_token.equals("K: void")){		
+			System.out.println("A: void");
+			curr_token = sc.nextLine();
+			System.out.println(curr_token);
+		} else if(curr_token.equals("K: float")){		
+			System.out.println("A: float");
+			curr_token = sc.nextLine();
+		} else {
+			rej();
+		}
+	}	
 	
-	//Just a test for github and laptop number a million
-	
+	private static void rej() {
+		System.out.println("Reject");
+		System.exit(0);
+	}
 }
