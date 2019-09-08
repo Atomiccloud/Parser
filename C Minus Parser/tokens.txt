@@ -9,6 +9,7 @@ ID: x
 ;
 ID: x
 [
+INT: 1
 ]
 =
 ID: input
