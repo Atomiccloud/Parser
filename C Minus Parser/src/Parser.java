@@ -91,6 +91,83 @@ public class Parser {
 	}
 
 	private static void stmtList() {
+		statement();
+		stmtListP();		
+	}
+
+	private static void stmtListP() {
+		if (!curr_token.equals("}")) {
+			statement();
+			stmtListP();
+		}
+	}
+
+	private static void statement() {
+		if(curr_token.equals("{")) {
+			compoundStmt();
+		} else if (curr_token.contains("K: if")) {
+			curr_token = sc.nextLine();
+			selectionStmt();
+		} else if (curr_token.equals("K: while")) {
+			curr_token = sc.nextLine();
+			iterationStmt();
+		} else if (curr_token.equals("K: return")) {
+			curr_token = sc.nextLine();
+			returnStmt();
+		} else {
+			expressionStmt();
+		}
+	}
+
+	private static void expressionStmt() {
+		if (curr_token.equals(";")) {
+			curr_token = sc.nextLine();			
+		} else {
+			expression();
+		}
+	}
+
+	private static void expression() {
+		String tempToken = curr_token;
+		curr_token = sc.nextLine();
+		if(curr_token.equals("=") || curr_token.equals("[")) {
+			var(tempToken);
+			System.out.println("A: =");
+			curr_token = sc.nextLine();
+			expression();
+		} else {
+			simpleExpression();
+		}
+	}
+
+	private static void simpleExpression() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void var(String token) {
+		System.out.println("A: " + token);
+		if(curr_token.equals("[")) {
+			System.out.println("A: [");
+			expression();
+			if(curr_token.equals("]")) {
+				curr_token = sc.nextLine();
+				System.out.println("A: ]");
+			}
+		}
+	}
+
+	private static void returnStmt() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void iterationStmt() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void selectionStmt() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -107,8 +184,10 @@ public class Parser {
 	}
 
 	private static void localDecP() {
-		// TODO Auto-generated method stub
-		
+		if (curr_token.contains("K: ")) {
+			varDec();
+			localDecP();
+		} 
 	}
 
 	private static void varDec() {
@@ -121,6 +200,16 @@ public class Parser {
 			curr_token = sc.nextLine();
 			System.out.println("A: [");
 			checkNUM();
+			if(!curr_token.equals("]")) {
+				rej();
+			}
+			System.out.println("A: ]");
+			curr_token = sc.nextLine();
+			if(!curr_token.equals(";")) {
+				rej();
+			}
+			System.out.println("A: ;");
+			curr_token = sc.nextLine();
 		} else {
 			rej();
 		}

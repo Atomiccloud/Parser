@@ -6,7 +6,14 @@ K: void
 {
 K: int
 ID: x
+;
+ID: x
+[
+]
 =
-INT: 15
+ID: input
+(
+INT: 10
+)
 ;
 }
