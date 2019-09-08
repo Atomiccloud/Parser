@@ -133,7 +133,6 @@ public class Parser {
 		if(curr_token.equals("=") || curr_token.equals("[")) {
 			var(tempToken);
 			System.out.println("A: =");
-			curr_token = sc.nextLine();
 			expression();
 		} else {
 			simpleExpression();
@@ -141,8 +140,60 @@ public class Parser {
 	}
 
 	private static void simpleExpression() {
+		addExpression();
+		if(curr_token.equals("<=") || curr_token.equals("<") || curr_token.equals(">") || curr_token.equals(">=") || curr_token.equals("==") || curr_token.equals("!=")) {
+			relop();
+			addExpression();
+		}
+	}
+
+	private static void relop() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	private static void addExpression() {
+		term();
+		addExpressionP();
+	}
+
+	private static void addExpressionP() {
+		addop();
+		term();
+	//	addExpressionP();
+	}
+
+	private static void termP() {
+		addop();
+		factor();
+		//termP();
+	}
+
+	private static void addop() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void factor() {
+		if (curr_token.equals("(")) {
+			System.out.println("A: (");
+			expression();
+		} else if (curr_token.contains("ID: ")) {
+			checkID();
+			factorP();
+		} else if (curr_token.contains("INT: ")) {
+			System.out.println("A: " + curr_token);
+		}
+	}
+
+	private static void factorP() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void term() {
+		factor();
+		termP();
 	}
 
 	private static void var(String token) {
@@ -217,11 +268,9 @@ public class Parser {
 	}
 
 	private static void checkNUM() {
-		try{
-			Integer.parseInt(curr_token);
+		if (curr_token.contains("INT: ")) {
 			System.out.println("A: " + curr_token);
-			curr_token = sc.nextLine();
-		} catch(Exception e) {
+		} else {
 			rej();
 		}
 	}
