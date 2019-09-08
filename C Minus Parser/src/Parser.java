@@ -130,9 +130,11 @@ public class Parser {
 	private static void expression() {
 		String tempToken = curr_token;
 		curr_token = sc.nextLine();
+		System.out.println("IN Expression: " + curr_token);
 		if(curr_token.equals("=") || curr_token.equals("[")) {
 			var(tempToken);
 			System.out.println("A: =");
+			
 			expression();
 		} else {
 			simpleExpression();
@@ -197,6 +199,7 @@ public class Parser {
 	}
 
 	private static void var(String token) {
+		//System.out.println("Here++++++");
 		System.out.println("A: " + token);
 		if(curr_token.equals("[")) {
 			System.out.println("A: [");
