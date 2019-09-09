@@ -7,6 +7,7 @@ public class Parser {
 	//Global Variables
 	static Scanner sc = null;
 	static String curr_token = null;
+	static String tempToken = null;
  
 		
 	public static void main(String[] args) {
@@ -21,7 +22,12 @@ public class Parser {
 			sc = new Scanner(textFile);
 			curr_token = sc.nextLine();
 //			next_token = curr_token;
-			decList();			
+			decList();		
+			if(curr_token.equals("$")) {
+				System.out.println("Accept");
+			} else {
+				rej();
+			}
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found!");
 		}
@@ -36,17 +42,16 @@ public class Parser {
 	}
 	
 	private static void decListP() {
-		//if need more dec do this
-		declaration();
-		//decListP();
-		// else do nothing
+		if (!curr_token.equals("$")) {
+			declaration();
+			decListP();
+		}
 	}
 
 	private static void declaration() {
 		typeSpecifier();
 		checkID();
 		declarationP();
-		
 	}
 
 	private static void checkID() {
@@ -84,9 +89,12 @@ public class Parser {
 
 	private static void compoundStmt() {
 		if(curr_token.equals("{")) {
+			System.out.println("A: " + curr_token);
 			curr_token = sc.nextLine();
 			localDec();
 			stmtList();
+			System.out.println("A: " + curr_token);
+			curr_token = sc.nextLine();
 		}
 	}
 
@@ -124,17 +132,20 @@ public class Parser {
 			curr_token = sc.nextLine();			
 		} else {
 			expression();
+			System.out.println("A: ;");
+			curr_token = sc.nextLine();
 		}
 	}
 
 	private static void expression() {
-		String tempToken = curr_token;
+		tempToken = curr_token;
 		curr_token = sc.nextLine();
-		System.out.println("IN Expression: " + curr_token);
+		if (curr_token.equals(")")) {
+			System.out.println("A: " + tempToken);
+		}
 		if(curr_token.equals("=") || curr_token.equals("[")) {
-			var(tempToken);
+			var();
 			System.out.println("A: =");
-			
 			expression();
 		} else {
 			simpleExpression();
@@ -160,14 +171,14 @@ public class Parser {
 	}
 
 	private static void addExpressionP() {
-		addop();
-		term();
+		//addop();
+		//term();
 	//	addExpressionP();
 	}
 
 	private static void termP() {
-		addop();
-		factor();
+		//addop();
+		//factor();
 		//termP();
 	}
 
@@ -177,6 +188,7 @@ public class Parser {
 	}
 
 	private static void factor() {
+		//System.out.println("In Factor: " + curr_token);
 		if (curr_token.equals("(")) {
 			System.out.println("A: (");
 			expression();
@@ -185,11 +197,55 @@ public class Parser {
 			factorP();
 		} else if (curr_token.contains("INT: ")) {
 			System.out.println("A: " + curr_token);
+			curr_token = sc.nextLine();
+		} else if (curr_token.equals(",")) {
+			System.out.println("A: " + tempToken);
+			System.out.println("A: ,");
+			curr_token = sc.nextLine();
 		}
 	}
 
 	private static void factorP() {
+		if (curr_token.equals("(")) {
+			callP();
+		} else {
+			varP();
+		}
+	}
+
+	private static void varP() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	private static void callP() {
+		System.out.println("A: (");
+		curr_token = sc.nextLine();
+		args();
+		if (curr_token.equals(")")) {
+			System.out.println("A: )");
+			curr_token = sc.nextLine();
+		} else {
+			rej();
+		}
+	}
+
+	private static void args() {
+		if (!curr_token.equals(")")) {
+			argList();
+		}
+	}
+
+	private static void argList() {
+		expression();
+		argListP();
+	}
+
+	private static void argListP() {
+		if (!curr_token.equals(")")) {
+			expression();	
+			argListP();
+		}
 		
 	}
 
@@ -198,9 +254,8 @@ public class Parser {
 		termP();
 	}
 
-	private static void var(String token) {
-		//System.out.println("Here++++++");
-		System.out.println("A: " + token);
+	private static void var() {
+		System.out.println("A: " + tempToken);
 		if(curr_token.equals("[")) {
 			System.out.println("A: [");
 			expression();
