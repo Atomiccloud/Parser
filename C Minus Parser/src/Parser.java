@@ -199,9 +199,15 @@ public class Parser {
 			System.out.println("A: " + curr_token);
 			curr_token = sc.nextLine();
 		} else if (curr_token.equals(",")) {
-			System.out.println("A: " + tempToken);
-			System.out.println("A: ,");
-			curr_token = sc.nextLine();
+			System.out.println("HERRREEEE");
+			if (tempToken.contains("ID: ") || tempToken.contains("INT: ")){
+				System.out.println("A: " + tempToken);
+				System.out.println("A: ,");
+				curr_token = sc.nextLine();
+			} else {
+				rej();
+			}
+			
 		}
 	}
 

@@ -15,8 +15,8 @@ INT: 1
 ID: input
 (
 INT: 10
+ID: p
 ,
-@
 INT: 12
 )
 ;
