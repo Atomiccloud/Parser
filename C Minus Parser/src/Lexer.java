@@ -10,7 +10,7 @@ public class Lexer {
 		String line;
 		Scanner sc = null;
 		boolean comment = false;
-		String[] keywords = { "while", "int", "void", "return", "if", "else" };
+		String[] keywords = { "while", "int", "void", "return", "if", "else", "float" };
 		PrintWriter writer = null;
 		
 		

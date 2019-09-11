@@ -5,20 +5,41 @@ K: void
 )
 {
 K: int
+ID: lokfosdkfosdf
+;
+K: float
 ID: x
 ;
-ID: x
-[
-INT: 1
-]
+ID: hihi
 =
-ID: input
-(
-INT: 10
-ID: p
-,
-INT: 12
-)
+INT: 20
+/
+INT: 5
 ;
+K: while
+(
+ID: hihi
+!=
+INT: 0
+)
+{
+ID: lokfosdkfosdf
+=
+INT: 4
+;
+}
+K: if
+(
+ID: x
+==
+ID: y
+)
+{
+K: return
+ID: x
+>=
+INT: 5
+;
+}
 }
 $
