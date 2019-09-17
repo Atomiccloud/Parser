@@ -160,16 +160,12 @@ public class Lexer {
 //								System.out.println("<=");
 								writer.println("<=");
 								i++;
-							}
-						} else {
+							} else {
 //							System.out.println("<");
 							writer.println("<");
+							}
 						}
-					} else {
-//						System.out.println("<");
-						writer.println("<");
-					}
-					break;
+					} break;
 				case '>':
 					if (!comment) {
 						if (i + 1 < line.length()) {
@@ -177,10 +173,10 @@ public class Lexer {
 //								System.out.println(">=");
 								writer.println(">=");
 								i++;
-							}
-						} else {
+							} else {
 //							System.out.println(">");
 							writer.println(">");
+							}
 						}
 					}
 					break;
@@ -228,8 +224,13 @@ public class Lexer {
 						} else if(Character.isDigit(line.charAt(i))) {
 							String substring = buildNum(i, line);
 							i += substring.length()-1;
-//							System.out.println("INT: " + substring);
-							writer.println("INT: " + substring);
+							if(substring.contains(".")) {
+								writer.println("FLOAT: " + substring);
+							} else if (substring.contains("e")) {
+								writer.println("INT: " + substring);
+							} else {
+								writer.println("INT: " + substring);
+							}
 						} else {
 //							System.out.println("Error: " + line.charAt(i));
 							writer.println(line.charAt(i));
@@ -255,11 +256,19 @@ public class Lexer {
 	}
 	
 	public static String buildNum(int i, String line) {
+		boolean isFloat = false;
+		boolean isE = false;
 		int k = i;
 		while(k < line.length()) {
 			if(Character.isDigit(line.charAt(k))) {
 				k++;
-			} else {
+			} else if (line.charAt(k) == '.' && isFloat == false){
+				isFloat = true;
+				k++;	
+			} else if (line.charAt(k) == 'e' && isE == false) {
+				isE = true;
+				k++;
+			}else {
 				return line.substring(i,k);
 			}
 		}

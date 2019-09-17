@@ -1,45 +1,441 @@
 K: void
+ID: sub
+(
+K: int
+ID: a
+,
+K: int
+ID: b
+)
+{
+ID: a
+-
+ID: b
+;
+ID: a
+>
+ID: b
+;
+ID: a
+<=
+ID: b
+;
+K: return
+;
+}
+K: float
+ID: foointvoid
+;
+K: int
+ID: e
+[
+INT: 44
+]
+;
+K: float
+ID: foointvoid
+(
+K: int
+ID: a
+,
+K: int
+ID: b
+[
+]
+,
+K: float
+ID: c
+,
+K: float
+ID: d
+[
+]
+)
+{
+K: int
+ID: e
+;
+K: float
+ID: m
+;
+K: float
+ID: f
+;
+K: float
+ID: g
+;
+K: if
+(
+ID: a
++
+ID: b
+[
+INT: 1
++
+INT: 2
+*
+INT: 3
+]
+>
+(
+ID: a
+*
+(
+(
+ID: a
+)
+)
+)
+)
+K: if
+(
+ID: b
+[
+INT: 1
+]
+>
+ID: b
+[
+INT: 4
++
+(
+INT: 5
+*
+(
+INT: 6
+-
+(
+INT: 7
+/
+(
+INT: 8
+)
+)
+)
+)
+]
+)
+ID: main
+(
+)
+;
+K: else
+{
+K: int
+ID: f
+[
+INT: 9
+]
+;
+}
+ID: c
+=
+ID: d
+[
+ID: b
+[
+ID: b
+[
+INT: 0
+]
+]
+]
++
+(
+INT: 9
+*
+ID: d
+[
+ID: main
+(
+)
++
+INT: 1
+]
++
+ID: d
+[
+ID: a
+*
+INT: 10
+]
+)
++
+ID: c
+*
+ID: c
+/
+ID: c
+/
+ID: c
+/
+ID: c
++
+ID: c
++
+ID: c
++
+ID: c
+;
+;
+;
+;
+;
+{
+K: int
+ID: q
+;
+{
+{
+K: float
+ID: f
+[
+INT: 99
+]
+;
+ID: f
+[
+INT: 0
+]
+=
+ID: f
+[
+INT: 1
+]
+=
+ID: d
+[
+INT: 0
+]
++
+ID: c
+*
+FLOAT: 2.0
+;
+K: return
+ID: foointvoid
+(
+ID: b
+[
+ID: e
+]
++
+ID: q
+,
+ID: b
+,
+ID: c
++
+ID: d
+[
+INT: 11
+]
++
+ID: d
+[
+INT: 12
+]
+/
+(
+ID: d
+[
+INT: 13
+]
+/
+(
+ID: d
+[
+INT: 14
+]
+*
+ID: d
+[
+INT: 15
+]
+)
+)
+,
+ID: f
+)
+;
+}
+}
+ID: q
++
+INT: 4
+;
+}
+K: while
+(
+INT: 16
++
+INT: 17
+/
+INT: 18
+*
+INT: 19
+-
+INT: 20
+-
+(
+INT: 21
+-
+INT: 22
+)
+)
+{
+K: float
+ID: g
+;
+K: if
+(
+FLOAT: 2.0e14
+>
+INT: 2e
+-
+INT: 14
+)
+{
+K: return
+ID: g
+;
+K: return
+ID: f
+;
+}
+K: return
+ID: g
++
+ID: foointvoid
+/
+FLOAT: 99.99
+;
+}
+K: while
+(
+(
+INT: 9e0
+<
+INT: 9e1
+)
+!=
+(
+INT: 9e1
+>
+INT: 9e2
+)
+)
+;
+ID: e
+=
+ID: a
+>
+INT: 0
++
+INT: 4
+;
+ID: m
+=
+ID: f
+=
+ID: g
+=
+ID: d
+[
+INT: 1
++
+ID: main
+(
+)
+/
+INT: 4
+/
+(
+INT: 4
+-
+INT: 4
++
+INT: 4
+*
+INT: 4
+)
+]
+=
+ID: c
+;
+K: if
+(
+ID: a
+)
+;
+K: else
+;
+K: if
+(
+ID: m
+>
+ID: f
+)
+{
+K: return
+ID: d
+[
+INT: 0
+]
+;
+}
+K: else
+K: return
+ID: d
+[
+INT: 1
+]
+;
+}
+K: int
 ID: main
 (
 K: void
 )
 {
 K: int
-ID: lokfosdkfosdf
+ID: a
 ;
-K: float
-ID: x
+K: int
+ID: b
+[
+INT: 1
+]
 ;
-ID: hihi
-=
-INT: 20
-/
-INT: 5
+K: int
+ID: c
 ;
-K: while
+K: int
+ID: d
+[
+INT: 1
+]
+;
+ID: sub
 (
-ID: hihi
-!=
-INT: 0
-)
-{
-ID: lokfosdkfosdf
-=
 INT: 4
-;
-}
-K: if
-(
-ID: x
-==
-ID: y
+,
+INT: 6
 )
-{
-K: return
-ID: x
->=
-INT: 5
 ;
-}
+ID: floatmainvoid
+(
+ID: a
+,
+ID: b
+,
+ID: c
+,
+ID: d
+)
+;
+K: return
+INT: 0
+;
 }
 $

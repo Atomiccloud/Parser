@@ -3,24 +3,23 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Parser {
-
 	//Global Variables
 	static Scanner sc = null;
 	static String curr_token = null;
 	static String tempToken = null;
+	
  
 		
 	public static void main(String[] args) {
-		// declarations
-		
 		File textFile = new File(args[0]);
 		Lexer lexer = new Lexer(textFile);
 		textFile = new File("tokens.txt");
-//		String next_token = null;
+		
 		try {
 			sc = new Scanner(textFile);
 			curr_token = sc.nextLine();
-//			next_token = curr_token;
+			
+			
 			decList();		
 			if(curr_token.equals("$")) {
 				System.out.println("Accept");
@@ -35,7 +34,7 @@ public class Parser {
 
 	}
 	
-	private static void decList() {
+	private static void decList() {	
 		declaration();
 		decListP();
 	}
@@ -64,8 +63,6 @@ public class Parser {
 
 	private static void declarationP() {
 		if (curr_token.equals(";") || curr_token.equals("[")) {
-			System.out.println("A: " + curr_token);
-			curr_token = sc.nextLine();			
 			varDecP();
 		} else if (curr_token.equals("(")) {
 			funDecP();
@@ -105,14 +102,10 @@ public class Parser {
 	}
 
 	private static void stmtList() {
-		statement();
-		stmtListP();		
-	}
-
-	private static void stmtListP() {
-		if (curr_token.equals("(") || curr_token.equals("{") || curr_token.contains("ID: ") || curr_token.contains("K: ") || curr_token.equals("INT: ")) {
+		if (curr_token.equals("(") || curr_token.equals("{") || curr_token.contains("ID: ") || curr_token.contains("K: ") || curr_token.contains("INT: ") 
+				|| curr_token.equals(";") || curr_token.contains("FLOAT: ")) {
 			statement();
-			stmtListP();
+			stmtList();
 		}
 	}
 
@@ -177,7 +170,6 @@ public class Parser {
 			factor();
 			termP();
 		}
-		
 	}
 
 	private static void mulop() {
@@ -202,7 +194,7 @@ public class Parser {
 		} else if (curr_token.contains("ID: ")) {
 			checkID();
 			factorP();
-		} else if (curr_token.contains("INT: ")) {
+		} else if (curr_token.contains("INT: ") || curr_token.contains("FLOAT: ")) {
 			checkNUM();
 		} else {
 			rej();
@@ -230,7 +222,7 @@ public class Parser {
 				if (curr_token.equals("=")) {
 					System.out.println("A: =");
 					curr_token = sc.nextLine();
-					if(curr_token.equals("(") || curr_token.contains("ID: ") || curr_token.contains("INT: ") ) {
+					if(curr_token.equals("(") || curr_token.contains("ID: ") || curr_token.contains("INT: ") || curr_token.contains("FLOAT: ")) {
 						expression();
 					} else {
 						checkID();
@@ -271,7 +263,7 @@ public class Parser {
 	}
 
 	private static void args() {
-		if (curr_token.equals("(") || curr_token.contains("ID: ") || curr_token.equals("INT: ")) {
+		if (curr_token.equals("(") || curr_token.contains("ID: ") || curr_token.contains("INT: ") || curr_token.contains("FLOAT: ")) {
 			argList();
 		}
 	}
@@ -363,13 +355,6 @@ public class Parser {
 		}
 	}
 
-//	private static void localDecP() {
-//		if (curr_token.contains("K: ")) {
-//			varDec();
-//			localDecP();
-//		} 
-//	}
-
 	private static void varDec() {
 		typeSpecifier();
 		checkID();
@@ -397,7 +382,7 @@ public class Parser {
 	}
 
 	private static void checkNUM() {
-		if (curr_token.contains("INT: ")) {
+		if (curr_token.contains("INT: ") || curr_token.contains("FLOAT: ")) {
 			System.out.println("A: " + curr_token);
 			curr_token = sc.nextLine();
 		} else {
@@ -478,7 +463,7 @@ public class Parser {
 	}	
 	
 	private static void rej() {
-		System.out.println("Reject");
+		System.out.println("Reject: " + curr_token);
 		System.exit(0);
 	}
 }
