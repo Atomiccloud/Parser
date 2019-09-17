@@ -10,10 +10,8 @@ public class Lexer {
 		String line;
 		Scanner sc = null;
 		boolean comment = false;
-		String[] keywords = { "while", "int", "void", "return", "if", "else", "float" };
+		String[] keywords = { "while", "int", "void", "return", "if", "else"};
 		PrintWriter writer = null;
-		
-		
 
 		// scan file
 		try {
@@ -224,13 +222,8 @@ public class Lexer {
 						} else if(Character.isDigit(line.charAt(i))) {
 							String substring = buildNum(i, line);
 							i += substring.length()-1;
-							if(substring.contains(".")) {
-								writer.println("FLOAT: " + substring);
-							} else if (substring.contains("e")) {
-								writer.println("INT: " + substring);
-							} else {
-								writer.println("INT: " + substring);
-							}
+//							System.out.println("INT: " + substring);
+							writer.println("INT: " + substring);
 						} else {
 //							System.out.println("Error: " + line.charAt(i));
 							writer.println(line.charAt(i));
@@ -256,21 +249,10 @@ public class Lexer {
 	}
 	
 	public static String buildNum(int i, String line) {
-		boolean isFloat = false;
-		boolean isE = false;
 		int k = i;
 		while(k < line.length()) {
 			if(Character.isDigit(line.charAt(k))) {
 				k++;
-			} else if (line.charAt(k) == '.' && isFloat == false){
-				isFloat = true;
-				k++;	
-			} else if (line.charAt(k) == 'e' && isE == false) {
-				isE = true;
-				k++;
-				if(line.charAt(k) == '-') {
-					k++;
-				}
 			} else {
 				return line.substring(i,k);
 			}

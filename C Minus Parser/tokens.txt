@@ -23,7 +23,7 @@ ID: b
 K: return
 ;
 }
-K: float
+K: int
 ID: foointvoid
 ;
 K: int
@@ -32,7 +32,7 @@ ID: e
 INT: 44
 ]
 ;
-K: float
+K: int
 ID: foointvoid
 (
 K: int
@@ -43,10 +43,10 @@ ID: b
 [
 ]
 ,
-K: float
+K: int
 ID: c
 ,
-K: float
+K: int
 ID: d
 [
 ]
@@ -55,13 +55,13 @@ ID: d
 K: int
 ID: e
 ;
-K: float
+K: int
 ID: m
 ;
-K: float
+K: int
 ID: f
 ;
-K: float
+K: int
 ID: g
 ;
 K: if
@@ -187,7 +187,7 @@ ID: q
 ;
 {
 {
-K: float
+K: int
 ID: f
 [
 INT: 99
@@ -210,14 +210,14 @@ INT: 0
 +
 ID: c
 *
-FLOAT: 2.0
+INT: 2
 ;
 K: return
 ID: foointvoid
 (
 ID: b
 [
-ID: e
+INT: 1
 ]
 +
 ID: q
@@ -284,14 +284,14 @@ INT: 22
 )
 )
 {
-K: float
+K: int
 ID: g
 ;
 K: if
 (
-FLOAT: 2.0e14
+INT: 214
 >
-INT: 2e-14
+INT: 214
 )
 {
 K: return
@@ -306,21 +306,21 @@ ID: g
 +
 ID: foointvoid
 /
-FLOAT: 99.99
+INT: 99
 ;
 }
 K: while
 (
 (
-INT: 9e0
+INT: 90
 <
-INT: 9e1
+INT: 91
 )
 !=
 (
-INT: 9e1
+INT: 91
 >
-INT: 9e2
+INT: 92
 )
 )
 ;
@@ -421,13 +421,9 @@ INT: 4
 INT: 6
 )
 ;
-ID: floatmainvoid
+ID: intmainvoid
 (
 ID: a
-=
-INT: 4
-+
-INT: 4
 ,
 ID: b
 ,

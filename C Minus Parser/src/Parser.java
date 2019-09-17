@@ -47,6 +47,7 @@ public class Parser {
 	}
 
 	private static void declaration() {
+		
 		typeSpecifier();
 		checkID();
 		declarationP();
@@ -103,7 +104,7 @@ public class Parser {
 
 	private static void stmtList() {
 		if (curr_token.equals("(") || curr_token.equals("{") || curr_token.contains("ID: ") || curr_token.contains("K: ") || curr_token.contains("INT: ") 
-				|| curr_token.equals(";") || curr_token.contains("FLOAT: ")) {
+				|| curr_token.equals(";") ) {
 			statement();
 			stmtList();
 		}
@@ -194,7 +195,7 @@ public class Parser {
 		} else if (curr_token.contains("ID: ")) {
 			checkID();
 			factorP();
-		} else if (curr_token.contains("INT: ") || curr_token.contains("FLOAT: ")) {
+		} else if (curr_token.contains("INT: ") ) {
 			checkNUM();
 		} else {
 			rej();
@@ -222,7 +223,7 @@ public class Parser {
 				if (curr_token.equals("=")) {
 					System.out.println("A: =");
 					curr_token = sc.nextLine();
-					if(curr_token.equals("(") || curr_token.contains("ID: ") || curr_token.contains("INT: ") || curr_token.contains("FLOAT: ")) {
+					if(curr_token.equals("(") || curr_token.contains("ID: ") || curr_token.contains("INT: ") ) {
 						expression();
 					} else {
 						checkID();
@@ -263,7 +264,7 @@ public class Parser {
 	}
 
 	private static void args() {
-		if (curr_token.equals("(") || curr_token.contains("ID: ") || curr_token.contains("INT: ") || curr_token.contains("FLOAT: ")) {
+		if (curr_token.equals("(") || curr_token.contains("ID: ") || curr_token.contains("INT: ") ) {
 			argList();
 		}
 	}
@@ -349,7 +350,7 @@ public class Parser {
 	}
 
 	private static void localDec() {
-		if (curr_token.equals("K: int") || curr_token.equals("K: float") || curr_token.equals("K: void")) {
+		if (curr_token.equals("K: int") || curr_token.equals("K: void")) {
 			varDec();
 			localDec();
 		}
@@ -382,7 +383,7 @@ public class Parser {
 	}
 
 	private static void checkNUM() {
-		if (curr_token.contains("INT: ") || curr_token.contains("FLOAT: ")) {
+		if (curr_token.contains("INT: ") ) {
 			System.out.println("A: " + curr_token);
 			curr_token = sc.nextLine();
 		} else {
@@ -444,6 +445,8 @@ public class Parser {
 			}
 			System.out.println("A: ;");
 			curr_token = sc.nextLine();
+		} else {
+			rej();
 		}
 	}
 
@@ -453,9 +456,6 @@ public class Parser {
 			curr_token = sc.nextLine();
 		} else if(curr_token.equals("K: void")){		
 			System.out.println("A: void");
-			curr_token = sc.nextLine();
-		} else if(curr_token.equals("K: float")){		
-			System.out.println("A: float");
 			curr_token = sc.nextLine();
 		} else {
 			rej();
