@@ -268,7 +268,10 @@ public class Lexer {
 			} else if (line.charAt(k) == 'e' && isE == false) {
 				isE = true;
 				k++;
-			}else {
+				if(line.charAt(k) == '-') {
+					k++;
+				}
+			} else {
 				return line.substring(i,k);
 			}
 		}

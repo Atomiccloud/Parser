@@ -52,6 +52,6 @@ int main(void) {
     int c;
     int d[1];
     sub(4, 6);
-    floatmainvoid(a, b, c, d);
+    floatmainvoid(a = 4 + 4, b, c, d);
     return 0;
 }

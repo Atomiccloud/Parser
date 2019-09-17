@@ -291,9 +291,7 @@ K: if
 (
 FLOAT: 2.0e14
 >
-INT: 2e
--
-INT: 14
+INT: 2e-14
 )
 {
 K: return
@@ -426,6 +424,10 @@ INT: 6
 ID: floatmainvoid
 (
 ID: a
+=
+INT: 4
++
+INT: 4
 ,
 ID: b
 ,
