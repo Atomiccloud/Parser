@@ -22,7 +22,7 @@ public class Parser {
 			
 			decList();		
 			if(curr_token.equals("$")) {
-				System.out.println("Accept");
+				System.out.println("ACCEPT");
 			} else {
 				rej();
 			}
@@ -55,7 +55,6 @@ public class Parser {
 
 	private static void checkID() {
 		if(curr_token.contains("ID: ")) {
-			System.out.println("A: " + curr_token);
 			curr_token = sc.nextLine();
 		} else {
 			rej();
@@ -74,11 +73,9 @@ public class Parser {
 	
 	private static void funDecP() {
 		if (curr_token.equals("(")) {
-			System.out.println("A: (");
 			curr_token = sc.nextLine();
 			params();
 			if (curr_token.equals(")")) {
-				System.out.println("A: )");
 				curr_token = sc.nextLine();
 				compoundStmt();
 			} else {
@@ -91,13 +88,13 @@ public class Parser {
 
 	private static void compoundStmt() {
 		if(curr_token.equals("{")) {
-			System.out.println("A: " + curr_token);
 			curr_token = sc.nextLine();
 			localDec();
 			stmtList();
 			if(curr_token.equals("}")) {
-				System.out.println("A: }");
 				curr_token = sc.nextLine();
+			} else {
+				rej();
 			}
 		}
 	}
@@ -126,12 +123,10 @@ public class Parser {
 
 	private static void expressionStmt() {
 		if (curr_token.equals(";")) {
-			System.out.println("A: ;");
 			curr_token = sc.nextLine();			
 		} else {
 			expression();
 			if(curr_token.equals(";")) {
-				System.out.println("A: ;");
 				curr_token = sc.nextLine();				
 			} else {
 				rej();
@@ -148,7 +143,6 @@ public class Parser {
 	}
 
 	private static void relop() {
-		System.out.println("A: " + curr_token);
 		curr_token = sc.nextLine();
 	}
 
@@ -174,22 +168,18 @@ public class Parser {
 	}
 
 	private static void mulop() {
-		System.out.println("A: " + curr_token);	
 		curr_token = sc.nextLine();
 	}
 
 	private static void addop() {
-		System.out.println("A: " + curr_token);
 		curr_token = sc.nextLine();
 	}
 
 	private static void factor() {
 		if (curr_token.equals("(")) {
-			System.out.println("A: (");
 			curr_token = sc.nextLine();
 			expression();
 			if (curr_token.equals(")")) {
-				System.out.println("A: )");
 				curr_token = sc.nextLine();
 			}
 		} else if (curr_token.contains("ID: ")) {
@@ -212,27 +202,22 @@ public class Parser {
 
 	private static void varP() {
 		if (curr_token.equals("[")) {
-			System.out.println("A: [");
 			curr_token = sc.nextLine();
 			expression();
 			if (!curr_token.equals("]")) {
 				rej();
 			} else {
-				System.out.println("A: ]");
 				curr_token = sc.nextLine();
 				if (curr_token.equals("=")) {
-					System.out.println("A: =");
 					curr_token = sc.nextLine();
 					if(curr_token.equals("(") || curr_token.contains("ID: ") || curr_token.contains("INT: ") ) {
 						expression();
 					} else {
 						checkID();
 						if (curr_token.equals("[")) {
-							System.out.println("A: [");
 							curr_token = sc.nextLine();
 							expression();
 							if (curr_token.equals("]")) {
-								System.out.println("A: ]");
 								curr_token = sc.nextLine();
 							} else {
 								rej();
@@ -241,22 +226,18 @@ public class Parser {
 					}
 						rej();
 					}
-					//expression();
 				}
 			}
 		} else if (curr_token.equals("=")) {
-			System.out.println("A: =");
 			curr_token = sc.nextLine();
 			expression();
 		}
 	}
 
 	private static void callP() {
-		System.out.println("A: (");
 		curr_token = sc.nextLine();
 		args();
 		if (curr_token.equals(")")) {
-			System.out.println("A: )");
 			curr_token = sc.nextLine();
 		} else {
 			rej();
@@ -276,12 +257,10 @@ public class Parser {
 
 	private static void argListP() {
 		if(curr_token.equals(",")) {
-			System.out.println("A: ,");
 			curr_token = sc.nextLine();
 			expression();	
 			argListP();
-		}
-		
+		}	
 	}
 
 	private static void term() {
@@ -290,15 +269,12 @@ public class Parser {
 	}
 
 	private static void returnStmt() {
-		System.out.println("A: return");
 		curr_token = sc.nextLine();
 		if (curr_token.equals(";")) {
-			System.out.println("A: ;");
 			curr_token = sc.nextLine();
 		} else {
 			expression();
 			if (curr_token.equals(";")) {
-				System.out.println("A: ;");
 				curr_token = sc.nextLine();
 			} else {
 				rej();
@@ -307,14 +283,11 @@ public class Parser {
 	}
 
 	private static void iterationStmt() {
-		System.out.println("A: while");
 		curr_token = sc.nextLine();
 		if(curr_token.equals("(")) {
-			System.out.println("A: (");
 			curr_token = sc.nextLine();
 			expression();
 			if (curr_token.equals(")")) {
-				System.out.println("A: )");
 				curr_token = sc.nextLine();
 				statement();
 			} else {
@@ -326,18 +299,14 @@ public class Parser {
 	}
 
 	private static void selectionStmt() {
-		System.out.println("A: if");
 		curr_token = sc.nextLine();
 		if (curr_token.equals("(")) {
-			System.out.println("A: (");
 			curr_token = sc.nextLine();
 			expression();
 			if (curr_token.equals(")")) {
-				System.out.println("A: )");
 				curr_token = sc.nextLine();
 				statement();
 				if (curr_token.equals("K: else")) {
-					System.out.println("A: else");
 					curr_token = sc.nextLine();
 					statement();
 				}
@@ -361,20 +330,16 @@ public class Parser {
 		checkID();
 		if(curr_token.equals(";")) {
 			curr_token = sc.nextLine();
-			System.out.println("A: ;");
 		} else if (curr_token.equals("[")) {
 			curr_token = sc.nextLine();
-			System.out.println("A: [");
 			checkNUM();
 			if(!curr_token.equals("]")) {
 				rej();
 			}
-			System.out.println("A: ]");
 			curr_token = sc.nextLine();
 			if(!curr_token.equals(";")) {
 				rej();
 			}
-			System.out.println("A: ;");
 			curr_token = sc.nextLine();
 		} else {
 			rej();
@@ -384,7 +349,6 @@ public class Parser {
 
 	private static void checkNUM() {
 		if (curr_token.contains("INT: ") ) {
-			System.out.println("A: " + curr_token);
 			curr_token = sc.nextLine();
 		} else {
 			rej();
@@ -393,7 +357,6 @@ public class Parser {
 
 	private static void params() {
 		if(curr_token.equals("K: void")) {
-			System.out.println("A: void");
 			curr_token = sc.nextLine();
 		} else {
 			paramsList();
@@ -407,7 +370,6 @@ public class Parser {
 
 	private static void paramsListP() {
 		if(curr_token.equals(",")) {
-			System.out.println("A: ,");
 			curr_token = sc.nextLine();
 			param();
 			paramsListP();
@@ -418,10 +380,8 @@ public class Parser {
 		typeSpecifier();
 		checkID();
 		if(curr_token.equals("[")) {
-			System.out.println("A: [");
 			curr_token = sc.nextLine();
 			if(curr_token.equals("]")) {
-				System.out.println("A: ]");
 				curr_token = sc.nextLine();
 			}
 		}
@@ -429,21 +389,17 @@ public class Parser {
 
 	private static void varDecP() {
 		if(curr_token.equals(";")) {
-			System.out.println("A: ;");
 			curr_token = sc.nextLine();
 		} else if (curr_token.equals("[")) {
-			System.out.println("A: [");
 			curr_token = sc.nextLine();
 			checkNUM();
 			if(!curr_token.equals("]")) {
 				rej();
 			}
-			System.out.println("A: ]");
 			curr_token = sc.nextLine();
 			if(!curr_token.equals(";")) {
 				rej();
 			}
-			System.out.println("A: ;");
 			curr_token = sc.nextLine();
 		} else {
 			rej();
@@ -452,10 +408,8 @@ public class Parser {
 
 	private static void typeSpecifier() {
 		if(curr_token.equals("K: int")){		
-			System.out.println("A: int");
 			curr_token = sc.nextLine();
 		} else if(curr_token.equals("K: void")){		
-			System.out.println("A: void");
 			curr_token = sc.nextLine();
 		} else {
 			rej();
@@ -463,7 +417,7 @@ public class Parser {
 	}	
 	
 	private static void rej() {
-		System.out.println("Reject: " + curr_token);
+		System.out.println("REJECT");
 		System.exit(0);
 	}
 }
